@@ -1,401 +1,285 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jakub Novotny — Autoservis Jablonec nad Nisou</title>
-<meta name="description" content="Autoservis Jakub Novotny v Jablonci nad Nisou. Hodnocení 4,9 z 18 recenzí na Googlu. U Nisy 1179/25, Jablonec nad Nisou.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autoservis Jablonec nad Nisou, U Nisy | Jakub Novotny</title>
+<meta name="description" content="Autoservis Jakub Novotny, U Nisy 1179/25, Jablonec nad Nisou. Otevřeno pondělí až pátek 8–16, v sobotu a v neděli zavřeno. Objednání na telefonu 774 666 032.">
+<meta name="theme-color" content="#ede5d3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141512" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light dark;
+  --paper:#ede5d3;
+  --ink:#1c1b17;
+  --muted:#5b5649;
+  --rule:#c9bfa8;
+  --signal:#1d5a3b;
+  --on-signal:#f7f2e6;
+  --pad:clamp(1.25rem,5vw,3rem);
+  --slab:'Zilla Slab',Rockwell,Georgia,serif;
+  --text:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#141512;--ink:#ebe6d9;--muted:#a59f90;--rule:#3a3a33;--signal:#8fcca6;--on-signal:#0e1811}
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.55 var(--text);overflow-wrap:break-word}
+h1,h2,p,ol,dl,figure,blockquote{margin:0}
+h1,h2{font-family:var(--slab);font-weight:700;line-height:1}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+abbr[title]{text-decoration:none}
+.nw{white-space:nowrap}
+.frame{max-width:72rem;margin-inline:auto;padding-inline:var(--pad)}
+
+/* hlavička: jméno majitele jako na razítku zakázkového listu */
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.2rem 1.5rem;padding-top:1rem;padding-bottom:.85rem;border-bottom:2px solid var(--ink)}
+.brand{font:700 1.25rem/1.1 var(--slab)}
+.brand span{font:400 .9375rem/1 var(--text);color:var(--muted);margin-left:.4rem}
+.top-addr{font-size:.9375rem;color:var(--muted)}
+
+/* úvod */
+.hero{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem;padding-top:1.75rem;padding-bottom:2.75rem}
+.hero > *{min-width:0}
+.hero h1{font-size:clamp(2.75rem,12.5vw,6rem);line-height:.95;letter-spacing:-.015em}
+.hero h1 .sub{display:block;margin-top:.75rem;font:500 clamp(1.125rem,4.6vw,1.5rem)/1.2 var(--slab);letter-spacing:0}
+.phone{display:block;background:var(--signal);color:var(--on-signal);text-decoration:none;padding:.75rem 1rem .9rem;border-radius:3px}
+.phone-label{display:block;font:600 1rem/1.2 var(--text)}
+.phone-num{display:block;font:700 clamp(2.75rem,13.5vw,5.5rem)/.95 var(--slab);white-space:nowrap;margin-top:.2rem;letter-spacing:-.01em}
+.phone:hover .phone-num{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:.1em}
+.lead{font-size:1.1875rem;line-height:1.45;max-width:30rem}
+.more{display:grid;gap:.6rem;font-size:1rem;max-width:30rem}
+.more p{color:var(--muted)}
+.more a{color:var(--ink);font-weight:600}
+
+/* otevírací doba: skutečný týden na ose 6–20 h */
+.hours h2{font:600 1rem/1.2 var(--text);margin-bottom:.5rem}
+.week{width:100%;border-collapse:collapse}
+.week th{width:2.6rem;text-align:left;vertical-align:middle;font:700 1.3rem/1 var(--slab);padding:0}
+.week tbody td{padding:.2rem 0;border-right:1px solid var(--rule);background:linear-gradient(to right,var(--rule) 1px,transparent 1px) 0 0/14.2857% 100% repeat-x}
+.bar,.closed{display:block;margin-left:14.2857%;width:57.1429%;padding:.4rem .6rem;border-radius:2px;white-space:nowrap}
+.bar{background:var(--ink);color:var(--paper);font:700 1.125rem/1.1 var(--slab)}
+.closed{border:1px dashed var(--muted);padding-block:calc(.4rem - 1px);background:var(--paper);color:var(--muted);font:italic 400 1rem/1.2375 var(--text)}
+.today th::after{content:"dnes";display:block;margin-top:.2rem;font:600 .6875rem/1 var(--text);letter-spacing:.04em}
+.axis{position:relative;height:1.4rem;padding:0}
+.axis span{position:absolute;top:.3rem;font:500 .8125rem/1 var(--text);color:var(--muted);transform:translateX(-50%)}
+.axis span:first-child{transform:none}
+.axis span:last-child{transform:translateX(-100%)}
+
+/* sekce: štítek vlevo, obsah vpravo */
+.band{border-top:1px solid var(--ink);padding-top:2.25rem;padding-bottom:2.75rem}
+.split{display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem 3rem}
+.split > *{min-width:0}
+.split h2{font-size:clamp(1.9rem,7.5vw,2.75rem);line-height:1.02;max-width:13ch}
+.aside p{margin-top:.9rem;max-width:22rem}
+
+/* když se objednáváte */
+.prep{list-style:none;padding:0;counter-reset:krok;display:grid;grid-template-columns:minmax(0,1fr);column-gap:2.5rem}
+.prep li{counter-increment:krok;display:grid;grid-template-columns:1.6rem minmax(0,1fr);gap:.75rem;padding-top:.9rem;padding-bottom:1rem;border-top:1px solid var(--rule)}
+.prep li > *{min-width:0}
+.prep li::before{content:counter(krok);font:700 1.6rem/1 var(--slab)}
+.prep strong{font-weight:600}
+.field{display:inline-block;min-width:1.6em;text-align:center;font:700 1rem/1 var(--slab);border:1.5px solid var(--ink);padding:.15em .3em .1em;border-radius:2px}
+
+/* recenze */
+.rating strong{font-weight:600}
+.q{padding-top:1.4rem;padding-bottom:1.5rem;border-top:1px solid var(--rule)}
+.q:first-child{border-top:0;padding-top:0}
+.q .when{font:700 1.25rem/1.1 var(--slab);margin-bottom:.55rem}
+.q blockquote{font-size:1.125rem;line-height:1.5;max-width:38rem}
+.q.lead-q blockquote{font:500 clamp(1.4rem,5.4vw,2.1rem)/1.28 var(--slab);max-width:40rem}
+.q figcaption{margin-top:.65rem;font-weight:600}
+
+/* adresa */
+.addr{font:700 clamp(1.9rem,8vw,3.25rem)/1.05 var(--slab)}
+.go{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.25rem;margin-bottom:1.75rem}
+.go a{display:inline-flex;align-items:center;min-height:2.875rem;padding:0 1.1rem;border:2px solid var(--ink);border-radius:3px;text-decoration:none;font-weight:600}
+.go a:first-child{background:var(--ink);color:var(--paper)}
+.go a:hover{text-decoration:underline}
+.facts{display:grid;grid-template-columns:minmax(0,6.5rem) minmax(0,1fr);gap:.55rem 1rem;max-width:34rem}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0;min-width:0}
+
+.foot{border-top:2px solid var(--ink);padding-top:1.1rem;padding-bottom:1.6rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.4rem 2rem;font-size:.875rem;color:var(--muted)}
+
+@media (min-width:40rem){
+  .prep{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .week th{width:3.5rem;font-size:1.5rem}
+  .bar{font-size:1.375rem;padding-block:.5rem}
+  .closed{font-size:1.0625rem;padding-block:calc(.5rem - 1px);line-height:1.2941}
+}
+@media (min-width:56rem){
+  .hero{grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:"h1 h1" "phone hours" "lead hours" "more hours";column-gap:4rem;row-gap:1.4rem;padding-top:3rem;padding-bottom:3.75rem}
+  .hero h1{grid-area:h1;margin-bottom:1.25rem}
+  .hours{grid-area:hours;align-self:start}
+  .phone{grid-area:phone;align-self:start;padding:1rem 1.35rem 1.15rem}
+  .phone-num{font-size:clamp(3rem,5.4vw,4.25rem)}
+  .lead{grid-area:lead;align-self:start}
+  .more{grid-area:more;align-self:start}
+  .split{grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
+  .band{padding-top:3rem;padding-bottom:3.5rem}
+}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "AutoRepair"],
+  "@type": "AutoRepair",
   "name": "Jakub Novotny",
-  "telephone": "+420774666032",
+  "description": "Autoservis v Jablonci nad Nisou, otevřeno pondělí až pátek 8–16.",
+  "telephone": "+420 774 666 032",
   "email": "cube.92@seznam.cz",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "U Nisy 1179/25",
-    "addressLocality": "Jablonec nad Nisou",
     "postalCode": "466 01",
+    "addressLocality": "Jablonec nad Nisou",
     "addressCountry": "CZ"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "18"
-  },
-  "url": ""
+  "geo": {"@type": "GeoCoordinates", "latitude": 50.724667, "longitude": 15.158176},
+  "hasMap": "https://www.google.com/maps/place/Jakub+Novotny/data=!4m7!3m6!1s0x470935e8594a57ed:0xbecebaa351f3c3c3!8m2!3d50.7246671!4d15.158176!16s%2Fg%2F11g4drm_bm!19sChIJ7VdKWeg1CUcRw8PzUaO6zr4",
+  "openingHours": "Mo-Fr 08:00-16:00",
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "08:00",
+    "closes": "16:00"
+  }],
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "worstRating": "1", "ratingCount": "18"},
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "Bezbariérový vstup", "value": true},
+    {"@type": "LocationFeatureSpecification", "name": "Bezbariérové parkování", "value": true}
+  ]
 }
 </script>
-<style>
-  :root {
-    --bg-dark: #12181f;
-    --bg-dark-2: #1a222c;
-    --accent: #e0a938;
-    --text-light: #f4f6f8;
-    --text-muted: #b7c0ca;
-    --text-body: #2a2f36;
-    --bg-body: #ffffff;
-    --bg-alt: #f4f6f8;
-    --radius: 10px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    color: var(--text-body);
-    background: var(--bg-body);
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, h3 {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.2;
-  }
-
-  a { color: inherit; }
-
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* HEADER / HERO */
-  header {
-    background: linear-gradient(160deg, var(--bg-dark) 0%, var(--bg-dark-2) 100%);
-    color: var(--text-light);
-    padding: 48px 0 56px;
-  }
-
-  .brand {
-    font-size: 0.95rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
-
-  header h1 {
-    font-size: 2.1rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-  }
-
-  header p.subtitle {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    margin-bottom: 22px;
-  }
-
-  .rating-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 999px;
-    padding: 8px 16px;
-    font-size: 0.95rem;
-    font-weight: 600;
-  }
-
-  .rating-badge .stars {
-    color: var(--accent);
-    letter-spacing: 1px;
-  }
-
-  .hero-cta {
-    margin-top: 28px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 13px 22px;
-    border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-    transition: transform 0.15s ease, opacity 0.15s ease;
-  }
-
-  .btn:active { transform: scale(0.97); }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #1a1305;
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--text-light);
-    border: 1px solid rgba(255,255,255,0.3);
-  }
-
-  /* SECTIONS */
-  section {
-    padding: 48px 0;
-  }
-
-  section.alt {
-    background: var(--bg-alt);
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  .section-lead {
-    color: #5a6169;
-    margin-bottom: 28px;
-    font-size: 0.98rem;
-  }
-
-  /* SERVICES */
-  .services-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .service-card {
-    background: #fff;
-    border: 1px solid #e7e9ec;
-    border-radius: var(--radius);
-    padding: 18px 20px;
-  }
-
-  .service-card h3 {
-    font-size: 1.02rem;
-    font-weight: 600;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .service-card h3::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-
-  .service-card p {
-    color: #5a6169;
-    font-size: 0.92rem;
-  }
-
-  /* HOURS */
-  .hours-table {
-    width: 100%;
-    max-width: 420px;
-    border-collapse: collapse;
-    background: #fff;
-    border: 1px solid #e7e9ec;
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-
-  .hours-table tr:not(:last-child) td {
-    border-bottom: 1px solid #eef0f2;
-  }
-
-  .hours-table td {
-    padding: 12px 16px;
-    font-size: 0.95rem;
-  }
-
-  .hours-table td:last-child {
-    text-align: right;
-    font-weight: 600;
-    color: var(--text-body);
-  }
-
-  .hours-note {
-    margin-top: 14px;
-    font-size: 0.85rem;
-    color: #8a9099;
-  }
-
-  /* CONTACT */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .contact-card {
-    background: #fff;
-    border: 1px solid #e7e9ec;
-    border-radius: var(--radius);
-    padding: 20px;
-  }
-
-  .contact-card .label {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #8a9099;
-    margin-bottom: 6px;
-  }
-
-  .contact-card a.value {
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-decoration: none;
-    color: var(--text-body);
-    word-break: break-word;
-  }
-
-  .contact-card a.value:hover {
-    color: var(--accent);
-  }
-
-  .map-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 6px;
-    font-weight: 600;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 0.95rem;
-  }
-
-  .map-link:hover { text-decoration: underline; }
-
-  /* FOOTER */
-  footer {
-    background: var(--bg-dark);
-    color: var(--text-muted);
-    padding: 28px 0;
-    text-align: center;
-  }
-
-  footer .credit {
-    margin-top: 10px;
-    font-size: 0.78rem;
-    color: #5c6470;
-  }
-
-  /* RESPONSIVE — tablet/desktop */
-  @media (min-width: 640px) {
-    header h1 { font-size: 2.6rem; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .contact-grid { grid-template-columns: 1fr 1fr; }
-  }
-</style>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <div class="brand">Autoservis</div>
-    <h1>Jakub Novotny</h1>
-    <p class="subtitle">Autoservis v Jablonci nad Nisou</p>
-    <div class="rating-badge">
-      <span class="stars">★★★★★</span>
-      <span>4,9 z 18 recenzí na Googlu</span>
-    </div>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="tel:+420774666032">Zavolat: 774 666 032</a>
-      <a class="btn btn-secondary" href="#kontakt">Kontakt</a>
-    </div>
-  </div>
+<header class="top frame">
+  <span class="brand">Jakub Novotny<span>autoservis</span></span>
+  <span class="top-addr">U&nbsp;Nisy 1179/25, Jablonec nad Nisou</span>
 </header>
 
-<section id="sluzby">
-  <div class="container">
-    <h2 class="section-title">Naše služby</h2>
-    <p class="section-lead">Běžný servis i opravy osobních vozidel.</p>
-    <div class="services-grid">
-      <div class="service-card">
-        <h3>Servisní prohlídky</h3>
-        <p>Pravidelná kontrola a údržba vozidla podle potřeby.</p>
-      </div>
-      <div class="service-card">
-        <h3>Diagnostika závad</h3>
-        <p>Vyhledání a vyhodnocení příčiny poruchy vozidla.</p>
-      </div>
-      <div class="service-card">
-        <h3>Výměna oleje a filtrů</h3>
-        <p>Motorový olej, olejové, vzduchové a palivové filtry.</p>
-      </div>
-      <div class="service-card">
-        <h3>Brzdový systém</h3>
-        <p>Kontrola a výměna brzdových destiček a kotoučů.</p>
-      </div>
-      <div class="service-card">
-        <h3>Pneuservis</h3>
-        <p>Přezutí, vyvážení a sezónní uskladnění pneumatik.</p>
-      </div>
-      <div class="service-card">
-        <h3>Klimatizace</h3>
-        <p>Kontrola a servis klimatizace vozidla.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<main>
 
-<section class="alt" id="oteviraci-doba">
-  <div class="container">
-    <h2 class="section-title">Otevírací doba</h2>
-    <p class="section-lead">Aktuální dostupnost si prosím ověřte telefonicky.</p>
-    <table class="hours-table">
-      <tr><td>Pondělí – Pátek</td><td>8:00 – 17:00</td></tr>
-      <tr><td>Sobota</td><td>Na objednání</td></tr>
-      <tr><td>Neděle</td><td>Zavřeno</td></tr>
+<section class="hero frame" aria-labelledby="titulek">
+  <h1 id="titulek">Pondělí až pátek, <span class="nw">8–16.</span><span class="sub">Opravy a&nbsp;servis aut v&nbsp;Jablonci nad&nbsp;Nisou</span></h1>
+
+  <div class="hours">
+    <h2>Otevírací doba</h2>
+    <table class="week">
+      <tbody>
+        <tr><th scope="row"><abbr title="pondělí">Po</abbr></th><td><span class="bar">8–16</span></td></tr>
+        <tr><th scope="row"><abbr title="úterý">Út</abbr></th><td><span class="bar">8–16</span></td></tr>
+        <tr><th scope="row"><abbr title="středa">St</abbr></th><td><span class="bar">8–16</span></td></tr>
+        <tr><th scope="row"><abbr title="čtvrtek">Čt</abbr></th><td><span class="bar">8–16</span></td></tr>
+        <tr><th scope="row"><abbr title="pátek">Pá</abbr></th><td><span class="bar">8–16</span></td></tr>
+        <tr><th scope="row"><abbr title="sobota">So</abbr></th><td><span class="closed">zavřeno</span></td></tr>
+        <tr><th scope="row"><abbr title="neděle">Ne</abbr></th><td><span class="closed">zavřeno</span></td></tr>
+      </tbody>
+      <tfoot aria-hidden="true">
+        <tr><td></td><td class="axis"><span style="left:0">6</span><span style="left:14.2857%">8</span><span style="left:42.8571%">12</span><span style="left:71.4286%">16</span><span style="left:100%">20&nbsp;h</span></td></tr>
+      </tfoot>
     </table>
-    <p class="hours-note">Orientační otevírací doba — pro jistotu prosím zavolejte předem.</p>
+  </div>
+
+  <a class="phone" href="tel:+420774666032">
+    <span class="phone-label">Objednávky u&nbsp;Jakuba</span>
+    <span class="phone-num">774 666 032</span>
+  </a>
+
+  <p class="lead">Na opravu se objednejte předem, ideálně v&nbsp;otevírací době. <a href="#objednani">Co mít po ruce, až budete volat.</a></p>
+
+  <div class="more">
+    <p>E-mail: <a href="mailto:cube.92@seznam.cz">cube.92@seznam.cz</a>. Hodí se na fotku kontrolky nebo techničáku.</p>
+    <p><a href="#recenze">17 z&nbsp;18 hodnocení na Googlu je pět hvězd.</a></p>
   </div>
 </section>
 
-<section id="kontakt">
-  <div class="container">
-    <h2 class="section-title">Kontakt</h2>
-    <p class="section-lead">Ozvěte se telefonicky, e-mailem, nebo nás najděte na místě.</p>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="label">Telefon</div>
-        <a class="value" href="tel:+420774666032">774 666 032</a>
-      </div>
-      <div class="contact-card">
-        <div class="label">E-mail</div>
-        <a class="value" href="mailto:cube.92@seznam.cz">cube.92@seznam.cz</a>
-      </div>
-      <div class="contact-card" style="grid-column: 1 / -1;">
-        <div class="label">Adresa</div>
-        <div class="value" style="font-weight:600; font-size:1rem;">U Nisy 1179/25, 466 01 Jablonec nad Nisou</div>
-        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=U+Nisy+1179%2F25%2C+466+01+Jablonec+nad+Nisou" target="_blank" rel="noopener noreferrer">
-          Zobrazit na mapě →
-        </a>
-      </div>
+<section class="band frame" id="objednani" aria-labelledby="objednani-h">
+  <div class="split">
+    <h2 id="objednani-h">Když se objednáváte</h2>
+    <ol class="prep">
+      <li><p><strong>Malý technický průkaz, nebo aspoň VIN.</strong> VIN najdete v&nbsp;techničáku v&nbsp;kolonce <span class="field">E</span>, má 17 znaků.</p></li>
+      <li><p><strong>Kolik má auto najeto.</strong> Stačí zaokrouhleně, jak to ukazuje tachometr.</p></li>
+      <li><p><strong>Co auto dělá a&nbsp;kdy.</strong> Třeba „klepe to vpředu přes díry“ nebo „za studena svítí kontrolka“. Svítí-li kontrolka, vyfoťte přístrojovou desku a&nbsp;pošlete fotku e-mailem.</p></li>
+      <li><p><strong>Kdy se bez auta obejdete.</strong> Otevřeno je ve všední dny od 8 do 16, v&nbsp;sobotu a&nbsp;v&nbsp;neděli zavřeno. Počítejte s&nbsp;tím, kdy auto přivezete a&nbsp;kdy ho budete zase potřebovat.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band frame" id="recenze" aria-labelledby="recenze-h">
+  <div class="split">
+    <div class="aside">
+      <h2 id="recenze-h">Z&nbsp;recenzí na Googlu</h2>
+      <p class="rating"><strong>17 z&nbsp;18</strong> hodnocení je pět hvězd, průměr 4,9. To zbylé dalo čtyři hvězdy.</p>
+      <p><a href="https://www.google.com/maps/place/Jakub+Novotny/data=!4m7!3m6!1s0x470935e8594a57ed:0xbecebaa351f3c3c3!8m2!3d50.7246671!4d15.158176!16s%2Fg%2F11g4drm_bm!19sChIJ7VdKWeg1CUcRw8PzUaO6zr4" target="_blank" rel="noopener">Všechny recenze v&nbsp;Mapách Google</a></p>
+    </div>
+    <div class="quotes">
+      <figure class="q lead-q">
+        <p class="when">V&nbsp;kartotéce</p>
+        <blockquote>S dobrym mechanikem jako se zubarem.. sem rad ze me ma p. Novotny v&nbsp;kartotece. Skvely pristup! DOPORUČUJI.</blockquote>
+        <figcaption>Jirka Z.</figcaption>
+      </figure>
+      <figure class="q">
+        <p class="when">Po opravě</p>
+        <blockquote>Milý, vstřícný, ochotný přístup pana Novotného mě ujistil, že jsem na stráveném místě. Po opravě mi vše ukázal, seznámil mě s&nbsp;činnostmi prováděnými na vozidle, vysvětlil a&nbsp;předložil staré součástky z&nbsp;vozidla. Ráda se zase k&nbsp;panu Novotnému vrátím.</blockquote>
+        <figcaption>Eliška B.</figcaption>
+      </figure>
+      <figure class="q">
+        <p class="when">Auta starší 20&nbsp;let</p>
+        <blockquote>Nebýt pana Novotného, musím se vzdát svých víc než 20 let starých aut. Perfektní přístup, lidová cena a&nbsp;maximální spokojenost s&nbsp;odvedenou prací!</blockquote>
+        <figcaption>Lukáš V.</figcaption>
+      </figure>
+      <figure class="q">
+        <p class="when">Před cestou do Německa</p>
+        <blockquote>Pomohl nám, když jsme potřebovali rychle odcestovat do Německa a&nbsp;domluvil i&nbsp;diagnostiku u&nbsp;elektro auto Bílek. Vstřícný a&nbsp;ochotný. Určitě doporučujeme</blockquote>
+        <figcaption>Ila S.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div>Jakub Novotny — Autoservis · Jablonec nad Nisou</div>
-    <div class="credit">Ukázka webu — Vladislav Zachariev</div>
+<section class="band frame" aria-labelledby="kde">
+  <div class="split">
+    <h2 id="kde">Kam přijet</h2>
+    <div>
+      <p class="addr">U&nbsp;Nisy 1179/25,<br> 466&nbsp;01 Jablonec nad&nbsp;Nisou&nbsp;1</p>
+      <p class="go">
+        <a href="https://www.google.com/maps/dir/?api=1&amp;destination=50.724667%2C15.158176" target="_blank" rel="noopener">Navigovat sem</a>
+        <a href="https://www.google.com/maps/place/Jakub+Novotny/data=!4m7!3m6!1s0x470935e8594a57ed:0xbecebaa351f3c3c3!8m2!3d50.7246671!4d15.158176!16s%2Fg%2F11g4drm_bm!19sChIJ7VdKWeg1CUcRw8PzUaO6zr4" target="_blank" rel="noopener">Otevřít v&nbsp;Mapách Google</a>
+      </p>
+      <dl class="facts">
+        <dt>Telefon</dt><dd><a href="tel:+420774666032">774 666 032</a>, objednávky</dd>
+        <dt>E-mail</dt><dd><a href="mailto:cube.92@seznam.cz">cube.92@seznam.cz</a></dd>
+        <dt>Otevřeno</dt><dd>Po–Pá 8–16, So a&nbsp;Ne zavřeno</dd>
+        <dt>GPS</dt><dd>50.724667, 15.158176</dd>
+        <dt>Přístup</dt><dd>Bezbariérový vstup i&nbsp;parkování</dd>
+      </dl>
+    </div>
   </div>
+</section>
+
+</main>
+
+<footer class="foot frame">
+  <p>Jakub Novotny, autoservis, U&nbsp;Nisy 1179/25, Jablonec nad Nisou</p>
+  <p>Ukázka webu — Vladislav Zachariev</p>
 </footer>
 
+<script>
+/* Označí dnešní den v otevírací době. Bez JavaScriptu se jen nic nezvýrazní. */
+(function () {
+  var rows = document.querySelectorAll('.week tbody tr');
+  var row = rows[(new Date().getDay() + 6) % 7];
+  if (row) row.classList.add('today');
+})();
+</script>
 </body>
 </html>
